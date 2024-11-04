@@ -26,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cicd-test-app:latest
+          tags: polarisroute/cicd-test-app:latest
           push: true
 
   deploy:
@@ -39,7 +39,7 @@ jobs:
           HOST: ${{ secrets.SSH_HOST }}
           USERNAME: ${{ secrets.SSH_USERNAME }}
           SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          DOCKER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/cicd-test-app:latest
+          DOCKER_IMAGE: polarisroute/cicd-test-app:latest
         run: |
           echo "$SSH_KEY" > ec2_key.pem
           chmod 600 ec2_key.pem
