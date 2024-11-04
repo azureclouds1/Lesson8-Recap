@@ -45,7 +45,7 @@ jobs:
           chmod 600 ec2_key.pem
           ssh -o StrictHostKeyChecking=no -i ec2_key.pem $USERNAME@$HOST << EOF
             docker pull $DOCKER_IMAGE
-            docker stop cicd-test-app || true
+            docker ps -q | xargs -r docker stop
             docker rm cicd-test-app || true
             docker run -d --name cicd-test-app -p 80:80 $DOCKER_IMAGE
           EOF
